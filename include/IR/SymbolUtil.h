@@ -116,7 +116,7 @@ namespace SysYust::IR {
 
         im_symbol(i32 val);
         im_symbol(f32 val);
-        im_symbol(flag f, const Type *type = Type::get(Type::i));
+        im_symbol(flag f, const Type *type = nullptr);
         ~im_symbol() = default;
 
         friend auto operator<=> (const im_symbol &lhs, const im_symbol &rhs) = default;
