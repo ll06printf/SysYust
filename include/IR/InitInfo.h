@@ -12,10 +12,9 @@ namespace SysYust::IR {
 
     class InitInfo {
     public:
-        using value_type = im_symbol;
-        using var_type = var_symbol;
+        using value_type = operant;
         using list_type = std::vector<InitInfo*>;
-        using data_type = std::variant<value_type, var_type, list_type>;
+        using data_type = std::variant<value_type, list_type>;
 
         InitInfo() = default;
         /*NOLINT*/ InitInfo(var_symbol var);
@@ -31,14 +30,14 @@ namespace SysYust::IR {
         [[nodiscard]] bool is_list() const {
             return _data.index() == 1;
         }
+        [[nodiscard]] bool is_value() const {
+            return _data.index() == 0;
+        }
         [[nodiscard]] value_type value() const {
             return std::get<value_type>(_data);
         }
         [[nodiscard]] const std::vector<InitInfo*>& list() const {
             return std::get<list_type>(_data);
-        }
-        [[nodiscard]] var_type var() const {
-            return std::get<var_type>(_data);
         }
 
 

@@ -49,10 +49,11 @@ namespace SysYust::IR {
         if (trueTarget == nullptr) {
             t->_prevBlock.push_back(this);
         } else { // 原先有子节点
-            auto target = ranges::find(t->_prevBlock, this);
-            if (target != t->_prevBlock.end()) {
-                t->_prevBlock.erase(target);
+            auto target = ranges::find(trueTarget->_prevBlock, this);
+            if (target != trueTarget->_prevBlock.end()) {
+                trueTarget->_prevBlock.erase(target);
             }
+            t->_prevBlock.push_back(this);
         }
         trueTarget = t;
     }
@@ -60,7 +61,7 @@ namespace SysYust::IR {
     void BasicBlock::setElse(BasicBlock *t) {
         assert(t);
         // 删除下一个节点的前驱
-        if (trueTarget == nullptr) {
+        if (falseTarget == nullptr) {
             t->_prevBlock.push_back(this);
         } else { // 原先有子节点
             auto target = ranges::find(t->_prevBlock, this);
