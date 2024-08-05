@@ -4,7 +4,6 @@
 
 #include <utility>
 #include <filesystem>
-#include <ranges>
 #include <exception>
 #include <stdexcept>
 #include <iostream>
@@ -16,6 +15,10 @@
 #include "SysYLexer.h"
 #include "SysYParser.h"
 
+#include <range/v3/range.hpp>
+#include <range/v3/view.hpp>
+#include <range/v3/action.hpp>
+
 #include "AST/SyntaxTreeBuilder.h"
 #include "fmt/format.h"
 #include "utility/Logger.h"
@@ -24,8 +27,8 @@
 #include "AST/SyntaxTreeString.h"
 
 namespace fs = std::filesystem;
-namespace ranges = std::ranges;
-namespace views = std::views;
+//namespace ranges = ::ranges;
+namespace views = ranges::views;
 namespace IREmitter = SysYust::AST::IREmitter;
 
 using namespace std::literals::string_literals;
