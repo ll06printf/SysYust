@@ -76,8 +76,15 @@ namespace SysYust::IR {
         , assigned({assigned.symbol, assigned.revision, [&]{
             // 计算结果类型
             auto curT = arr_like.type;
-            curT = curT->subtype();
-            assert(!curT->isPtr());
+
+            assert(curT->isPtr() && curT->subtype()->isArr() || curT->isArrDecay());
+            if (curT->isPtr()) {
+                curT = curT->subtype();
+                assert(!curT->isPtr());
+            } else {
+                assert(curT->isArrDecay());
+            }
+
             for (std::size_t i=0; i<index.size(); ++i) {
                 curT = curT->subtype();
             }

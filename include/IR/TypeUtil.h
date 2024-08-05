@@ -51,6 +51,9 @@ namespace SysYust::IR {
         [[nodiscard]] bool isArr() const {
             return _id == arr;
         }
+        [[nodiscard]] bool isArrDecay() const {
+            return _id == arr && _data == 0;
+        }
         [[nodiscard]] bool isPtr() const {
             return _id == ptr;
         }
